@@ -6,11 +6,18 @@ pipeline {
         kind: Pod
         spec:
           containers:
-          - name: maven
-            image: maven:alpine
+          - name: buildah
+            image: quay.io/buildah/stable:v1.35.4
             command:
             - cat
             tty: true
+            securityContext:
+              privileged: true
+            volumeMounts:
+            - name: varlibcontainers
+              mountPath: /var/lib/containers
+          volumes:
+          - name: varlibcontainers
 '''   
     }
   }
@@ -20,11 +27,10 @@ pipeline {
     disableConcurrentBuilds()
   }
   stages {
-    stage('Run maven') {
+    stage('Build with Buildah') {
       steps {
-        container('maven') {
-          sh 'mvn --version'
-        }
+         container('buildah') {
+           sh 'buildah build -t harbor.kube.local/public/automation:v0'
       }
     }
   }
