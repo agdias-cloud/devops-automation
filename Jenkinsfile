@@ -37,8 +37,11 @@ spec:
       }
     }
     stage('push image') {
+      
       steps {
-        sh 'buildah push harbor.kube.local/library/automation:v0'
+        container('buildah') {
+          sh 'buildah push harbor.kube.local/library/automation:v0'  
+        }
       }
     }
   }
