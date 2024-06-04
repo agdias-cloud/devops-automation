@@ -40,7 +40,7 @@ spec:
       
       steps {
         container('buildah') {
-          sh 'buildah push harbor.kube.local/library/automation:v0'  
+         sh 'echo $harbor-creds | buildah login -u $harbor-creds --password-stdin harbor.kube.local'
         }
       }
     }
