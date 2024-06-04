@@ -18,7 +18,7 @@ pipeline {
               mountPath: /var/lib/containers
           volumes:
           - name: varlibcontainers
-'''   
+      '''   
     }
   }
   options {
