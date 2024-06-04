@@ -36,7 +36,7 @@ spec:
         }
       }
     }
-    stage('push image') {
+    stage('buildah login') {
       
       steps {
         container('buildah') {
