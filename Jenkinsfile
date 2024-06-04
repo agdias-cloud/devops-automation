@@ -2,24 +2,15 @@ pipeline {
   agent {
     kubernetes {
       yaml '''
-apiVersion: v1
-kind: Pod
-metadata:
-  name: buildah
-spec:
-  containers:
-  - name: buildah
-    image: quay.io/buildah/stable:v1.35.4
-    command:
-    - cat
-    tty: true
-    securityContext:
-      privileged: true
-    volumeMounts:
-      - name: varlibcontainers
-        mountPath: /var/lib/containers
-  volumes:
-    - name: varlibcontainers
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: maven
+            image: maven:alpine
+            command:
+            - cat
+            tty: true
 '''   
     }
   }
@@ -29,10 +20,10 @@ spec:
     disableConcurrentBuilds()
   }
   stages {
-    stage('Build with Buildah') {
+    stage('Run maven') {
       steps {
-        container('buildah') {
-          sh 'buildah build -t harbor.kube.local/public/devops-automation:v1.0 .'
+        container('maven') {
+          sh 'mvn --version'
         }
       }
     }
