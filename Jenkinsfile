@@ -29,18 +29,14 @@ spec:
     disableConcurrentBuilds()
   }
   stages {
-    stage('Build with Buildah') {
-      steps {
-        container('buildah') {
-          sh 'buildah build -t harbor.kube.local/library/automation:v0 .'
-        }
-      }
-    }
+   
     stage('buildah login') {
-      
+      environment {
+        HARBOR_CREDS = credentials('robot')
+      }
       steps {
         container('buildah') {
-         sh 'echo $harbor-creds | buildah login -u $harbor-creds --password-stdin harbor.kube.local'
+         sh 'echo $HARBOR_CREDS | buildah login -u $HARBOR_CREDS --password-stdin core.harbor.kube.local'
         }
       }
     }
