@@ -29,7 +29,7 @@ spec:
     disableConcurrentBuilds()
   }
   environment {
-    DH_CREDS_PSW = credentials('dockerhub')
+    DH_CREDS_PSW=credentials('dockerhub')
   }
   stages {
     stage('buildah login') {
