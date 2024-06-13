@@ -59,9 +59,7 @@ spec:
     stage('push image') {
       steps {
         container('buildah') {
-          sh 'buildah push agdiascloud/devops-automation:v0'
-          sh 'buildah push agdiascloud/devops-automation:latest'
-          
+          sh 'buildah push agdiascloud/devops-automation:v0'  
         }
       }
     }
