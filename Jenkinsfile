@@ -32,11 +32,11 @@ spec:
    
     stage('buildah login') {
       environment {
-        HARBOR_CREDS = credentials('robot')
+        DH_CREDS = credentials('dockerhub')
       }
       steps {
         container('buildah') {
-         sh 'echo $HARBOR_CREDS | buildah login -u $HARBOR_CREDS --password-stdin core.harbor.kube.local'
+         sh 'echo $DH_CREDS | buildah login -u $DH_CREDS --password-stdin docker.io'
         }
       }
     }
