@@ -41,5 +41,12 @@ spec:
         }
       }
     }
+    stage('tag image') {
+      steps {
+        container('buildah') {
+          sh 'buildah tag agdiascloud/devops-automation:v0  agdiascloud/devops-automation/devops-automation:latest'
+        }
+      }
+    }
   }
 }
