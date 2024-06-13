@@ -34,7 +34,7 @@ spec:
     stage('Build with Buildah') {
       steps {
         container('buildah') {
-            sh 'buildah build -t agdiascloud/devops-automation/devops-automation:v0'
+            sh 'buildah build -t devops-automation:v0'
         }
       }
     }
@@ -51,15 +51,16 @@ spec:
     stage('tag image') {
       steps {
         container('buildah') {
-          sh 'buildah tag agdiascloud/devops-automation/devops-automation:v0  agdiascloud/devops-automation/devops-automation:latest'
+          sh 'buildah tag devops-automation:v0  agdiascloud/devops-automation:v0'
+        
         }
       }
     }
     stage('push image') {
       steps {
         container('buildah') {
-          sh 'buildah push agdiascloud/devops-automation/devops-automation:v0'
-          sh 'buildah push agdiascloud/devops-automation/devops-automation:latest'
+          sh 'buildah push agdiascloud/devops-automation:v0'
+          sh 'buildah push agdiascloud/devops-automation:latest'
           
         }
       }
