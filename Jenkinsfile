@@ -36,6 +36,7 @@ spec:
       steps {
         container('buildah') {
            sh 'echo $DH_CREDS_PSW | buildah login -u $DH_CREDS_USR --password-stdin docker.io'
+        }
       }
     }
   }
