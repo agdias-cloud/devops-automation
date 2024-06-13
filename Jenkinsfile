@@ -31,6 +31,13 @@ spec:
   }
   
   stages {
+    stage('Build with Buildah') {
+      steps {
+        container('buildah') {
+          sh 'buildah build -t agdiascloud/devops-automation:v0
+        }
+      }
+    }
     stage('buildah login') {
       environment {
         DH_CREDS = credentials('dockerhub')
