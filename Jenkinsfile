@@ -23,19 +23,21 @@ spec:
 '''   
     }
   }
+  
   options {
     buildDiscarder(logRotator(numToKeepStr: '3'))
     durabilityHint('PERFORMANCE_OPTIMIZED')
     disableConcurrentBuilds()
   }
-  environment {
-    DH_CREDS_PSW=credentials('dockerhub')
-  }
+  
   stages {
     stage('buildah login') {
+      environment {
+        DH_CREDS = credentials('dockerhub')
+      }
       steps {
         container('buildah') {
-           sh 'echo $DH_CREDS_PSW | buildah login -u $DH_CREDS_USR --password-stdin docker.io'
+           sh 'echo $DH_CREDS'
         }
       }
     }
