@@ -34,7 +34,7 @@ spec:
     stage('Build with Buildah') {
       steps {
         container('buildah') {
-            sh 'buildah build -t agdiascloud/devops-automation:v0'
+            sh 'buildah build -t agdiascloud/devops-automation/devops-automation:v0'
         }
       }
     }
